@@ -15,10 +15,12 @@ def main():
     # input = "LET foobar = 123"
     # input = "+- 23 9.8654 foo*THEN # This is a comment!\n+- */ >>= = !="
     lexer = Lexer(input)
-    parser = Parser(lexer)
+    emitter = Emitter("out.c")
+    parser = Parser(lexer, emitter)
 
     parser.program()
-    print("Parsing completed.")
+    emitter.writeFile()
+    print("Compiling completed.")
 
     """token = lexer.getToken()
     while token.kind != TokenType.EOF:
